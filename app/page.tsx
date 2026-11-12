@@ -2,6 +2,7 @@ import { Plus, TriangleAlert } from "lucide-react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { AppSidebar } from "@/components/layout/app-sidebar";
 import { CustomersTable, type Customer } from "@/components/shared/customers-table";
 
 const customers: Customer[] = [
@@ -42,37 +43,40 @@ async function handleDeleteCustomer(customer: Customer) {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background p-4 sm:p-6 lg:p-10">
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-6">
-        <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div className="flex flex-col gap-1">
-            <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-              Customers
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              View and manage your customer base, track engagement and spending.
-            </p>
-          </div>
-          <Button onClick={handleAddCustomer}>
-            <Plus className="h-4 w-4" />
-            Add customer
-          </Button>
-        </header>
-        <Alert variant="warning">
-          <TriangleAlert className="h-4 w-4" />
-          <AlertTitle >3 customers pending review</AlertTitle>
-          <AlertDescription>
-            You have 3 pending customers that have not been assigned to an
-            account manager yet.
-          </AlertDescription>
-        </Alert>
-        <CustomersTable
-          customers={customers}
-          onAddCustomer={handleAddCustomer}
-          onEditCustomer={handleEditCustomer}
-          onDeleteCustomer={handleDeleteCustomer}
-        />
-      </div>
-    </main>
+    <div className="flex min-h-screen bg-background">
+      <AppSidebar />
+      <main className="min-w-0 flex-1 p-4 pt-16 sm:p-6 sm:pt-16 lg:p-10">
+        <div className="mx-auto flex w-full max-w-5xl flex-col gap-6">
+          <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="flex flex-col gap-1">
+              <h1 className="text-2xl font-semibold tracking-tight text-foreground">
+                Customers
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                View and manage your customer base, track engagement and spending.
+              </p>
+            </div>
+            <Button onClick={handleAddCustomer}>
+              <Plus className="h-4 w-4" />
+              Add customer
+            </Button>
+          </header>
+          <Alert variant="warning">
+            <TriangleAlert className="h-4 w-4" />
+            <AlertTitle>3 customers pending review</AlertTitle>
+            <AlertDescription>
+              You have 3 pending customers that have not been assigned to an
+              account manager yet.
+            </AlertDescription>
+          </Alert>
+          <CustomersTable
+            customers={customers}
+            onAddCustomer={handleAddCustomer}
+            onEditCustomer={handleEditCustomer}
+            onDeleteCustomer={handleDeleteCustomer}
+          />
+        </div>
+      </main>
+    </div>
   );
 }
